@@ -4,6 +4,10 @@ body {
     width: 100%;
 }
 
+.dropdown-menu {
+  width: 300px !important;
+  height: 200px !important;
+}
 /* Footer */
 
 .fa {

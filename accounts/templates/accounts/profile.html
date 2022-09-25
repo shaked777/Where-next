@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+<div class="content-section">
+    <div class="container mt-5">
+      <div class="media-body">
+        <h2 class="account-heading">User name: {{ user.username }}</h2>
+        <p class="text-secondary">Full name: {{ user.traveler.first_name }} {{ user.traveler.last_name }}</p>
+        <p class="text-secondary">Email: {{ user.traveler.email }}</p>
+        <p class="text-secondary">Country: {{ user.traveler.country.name }}</p>
+        <i class="flag2x {{ user.traveler.country.flag_css }}"></i>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <h2 class="account-heading">Profile image:</h2>
+        <img class="rounded-circle account-img m-5" src="{{ user.traveler.avatar_img.url }}" width="400" height="400">
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
