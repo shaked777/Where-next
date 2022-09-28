@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .models import TravelerForm
@@ -67,10 +68,12 @@ def sing_in(request):
     context = {'form' : AuthenticationForm()}
     return render(request, 'accounts/sing-in.html', context)
 
+@login_required(login_url='/accounts/singin/')
 def user_logout(request):
     logout(request)
     return redirect('index')
 
+@login_required(login_url='/accounts/singin/')
 def update_profile(request):
     profile = request.user.traveler
 
@@ -85,6 +88,7 @@ def update_profile(request):
     
     return render(request, 'accounts/update_profile.html', context)
 
+@login_required(login_url='/accounts/singin/')
 def profile(request):
 
     if request.user.is_staff:
