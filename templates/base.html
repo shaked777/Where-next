@@ -54,14 +54,14 @@
                     <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                     <li><a class="dropdown-item" href="{% url 'update_profile' %}">update profile</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'sing_out' %}">Logout</a></li>
+                    <li><a class="dropdown-item" href="{% url 'sign_out' %}">Logout</a></li>
                   </ul>
                 </li>
                 </ul>
                 </div>
                 {% else %}
-                <a class="link-dark me-2" href="{% url 'sing_in' %}">Log in</a>
-                <a class="link-dark" href="{% url 'sing_up' %}">Sing up</a>
+                <a class="link-dark me-2" href="{% url 'sign_in' %}">Log in</a>
+                <a class="link-dark" href="{% url 'sign_up' %}">Sing up</a>
                 {% endif %}
 
               </div>
@@ -82,7 +82,7 @@
             <a href="#" class="fa fa-linkedin"></a>
             <a href="#" class="fa fa-youtube"></a>
             <a href="#" class="fa fa-instagram"></a>
-            <img src="{% static 'wherenext/images/my_sing.png' %}" alt="test">
+            <img src="{% static 'wherenext/images/my_sign.png' %}" alt="test">
             <p>where's next ™</p>
             <hr>
             <p>The idea - 

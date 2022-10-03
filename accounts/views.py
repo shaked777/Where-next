@@ -30,13 +30,13 @@ def sing_up(request):
                 print("User not authenticated")
         
         else:
-            return render(request, 'accounts/sing-up.html', {'form': form_filled})
+            return render(request, 'accounts/sign-up.html', {'form': form_filled})
 
     elif request.method != 'POST':
-         redirect('sing_up')
+         redirect('sign_up')
 
     context = {'form' : UserCreationForm()}
-    return render(request, 'accounts/sing-up.html', context)
+    return render(request, 'accounts/sign-up.html', context)
 
 def sing_in(request):
 
@@ -60,20 +60,20 @@ def sing_in(request):
         else:
             messages.warning(request, "User name or password are incorrect!")
             context = {'form': AuthenticationForm(request.POST)}
-            return render(request, 'accounts/sing-in.html', context)
+            return render(request, 'accounts/sign-in.html', context)
 
     elif request.method != 'POST':
-         redirect('sing_in')
+         redirect('sign_in')
 
     context = {'form' : AuthenticationForm()}
-    return render(request, 'accounts/sing-in.html', context)
+    return render(request, 'accounts/sign-in.html', context)
 
-@login_required(login_url='/accounts/singin/')
+@login_required(login_url='/accounts/signin/')
 def user_logout(request):
     logout(request)
     return redirect('index')
 
-@login_required(login_url='/accounts/singin/')
+@login_required(login_url='/accounts/signin/')
 def update_profile(request):
     profile = request.user.traveler
 
@@ -88,7 +88,7 @@ def update_profile(request):
     
     return render(request, 'accounts/update_profile.html', context)
 
-@login_required(login_url='/accounts/singin/')
+@login_required(login_url='/accounts/signin/')
 def profile(request):
 
     if request.user.is_staff:

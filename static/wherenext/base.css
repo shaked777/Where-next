@@ -40,7 +40,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color:hsla(0, 0%, 100%, 0.321);
+  background-color:hsla(0, 0%, 100%, 0.637);
 }
 
 .middle2 {
@@ -55,8 +55,11 @@ body {
 
 
 .middle h3 {
-  color: #333;
+  color: rgb(0, 0, 0);
+  
 }
+
+
 
 
 /* Style the <hr> element */

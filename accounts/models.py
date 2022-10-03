@@ -1,5 +1,3 @@
-from email.policy import default
-from random import choices
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
@@ -15,7 +13,7 @@ class Traveler(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     country = CountryField()
-    avatar_img = models.ImageField(default='defualt.png', upload_to='profile_pics')
+    avatar_img = models.ImageField(default='default.png', upload_to='profile_pics')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
