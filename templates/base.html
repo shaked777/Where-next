@@ -52,9 +52,10 @@
                     <center><i class="{{ user.traveler.country.flag_css }}"></i></center>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                    <li><a class="dropdown-item" href="{% url 'update_profile' %}">update profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'update_profile' %}">Update profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'update_preference' %}">Update you'r preference</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'sign_out' %}">Logout</a></li>
+                    <li><a class="dropdown-item" href="{% url 'sign_out' %}"><strong> Logout </strong></a></li>
                   </ul>
                 </li>
                 </ul>
@@ -82,7 +83,7 @@
             <a href="#" class="fa fa-linkedin"></a>
             <a href="#" class="fa fa-youtube"></a>
             <a href="#" class="fa fa-instagram"></a>
-            <img src="{% static 'wherenext/images/my_sign.png' %}" alt="test">
+            <img src="{% static 'wherenext/images/my_sing.png' %}" alt="test">
             <p>where's next ™</p>
             <hr>
             <p>The idea - 

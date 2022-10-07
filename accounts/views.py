@@ -83,7 +83,6 @@ def update_profile(request):
 
     if form.is_valid():
         form.save()
-        print(request.FILES)
         return redirect('index')
     
     return render(request, 'accounts/update_profile.html', context)
