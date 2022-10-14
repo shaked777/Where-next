@@ -56,6 +56,7 @@ class Trips(models.Model):
     ]
 
     country = CountryField()
+    city_code = models.CharField(max_length=5, default="not a city")
     season_start = models.DateField()
     season_end = models.DateField()
     famous_for = MultiSelectField(choices=POINT_OF_INTERESTS)

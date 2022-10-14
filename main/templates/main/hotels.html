@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{response.meta}}
+<h1>Best hotels in {{ trip.country.name }},{{ trip.city_code }}</h1>
+<br>
+<h3>{{trip.info}}</h3>
+<br>
+<div class="row">
+{% for hotel in response.data %}
+    <div class="col-sm-4 my-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ hotel.name }}</h5>
+            <p class="card-text">Loction: {{ trip.country.name }} {{ trip.city_code }}</p>
+            <a href="https://www.tripadvisor.com/Search?q={{ hotel.name|lower }}" class="btn btn-primary">Check the hotel</a>
+          </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock content %}
