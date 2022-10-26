@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.Preference)
 admin.site.register(models.Trips)
+admin.site.register(models.Trip)

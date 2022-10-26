@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<center><h1>Hello {{ user }}</h1>
+<h3>This is your preference :{{ traveler.point_of_interest }}</h3>
+    <p>you can change it in change preference</p>
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary btn-lg">Find your next trip</button></center>
+
+{% endblock content %}

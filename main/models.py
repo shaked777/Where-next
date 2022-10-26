@@ -56,11 +56,20 @@ class Trips(models.Model):
     ]
 
     country = CountryField()
-    city_code = models.CharField(max_length=5, default="not a city")
+    city_code = models.CharField(max_length=5, default='0')
     season_start = models.DateField()
     season_end = models.DateField()
     famous_for = MultiSelectField(choices=POINT_OF_INTERESTS)
     info = models.CharField(max_length=256)
+
+    def __str__(self):
+        return f"trip to: {self.country.name}"
+
+class Trip(models.Model):
+
+    country = CountryField()
+    city_code = models.CharField(max_length=5, default='0')
+    info = models.TextField()
 
     def __str__(self):
         return f"trip to: {self.country.name}"

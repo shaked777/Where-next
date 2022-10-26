@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Preference, PreferenceForm
-from .models import Trips
+from .models import Trip
 from amadeus import Client, ResponseError
 
 
@@ -42,7 +42,7 @@ def hotels(request, c_code):
         '''
         Get list of hotels by city code
         '''
-        trip = Trips.objects.get(city_code=c_code)
+        trip = Trip.objects.get(city_code=c_code)
         response = amadeus.reference_data.locations.hotels.by_city.get(cityCode=trip.city_code)
         context = {'response':response, 'trip':trip}
 
@@ -55,3 +55,8 @@ def hotels(request, c_code):
             return self.name.replace("", "-")
 
     return render(request, 'main/hotels.html', context)
+
+def recommend(request):
+    traveler = request.user.traveler.preference
+    context = {'traveler':traveler}
+    return render(request, 'main/recommend.html', context)
