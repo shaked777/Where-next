@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from email.policy import default
 from pathlib import Path
 import os
 import environ
@@ -32,7 +31,7 @@ if READ_ENV_FILE:
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
-
+DATABASE_URL = env('DATABASE_URL')
 
 ALLOWED_HOSTS = ['*']
 

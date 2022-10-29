@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from main.recommend_sys import main
 from .models import Preference, PreferenceForm
 from .models import Trip
 from amadeus import Client, ResponseError
@@ -13,7 +14,6 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 def update_preference(request):
-
     try:
         traveler = request.user.traveler.preference
     except:
@@ -24,12 +24,27 @@ def update_preference(request):
     context = {'form': form}
 
     if request.method == 'POST':
-        form_filed = PreferenceForm(request.POST, instance=traveler)
+        form = PreferenceForm(request.POST, instance=traveler)
         if form.is_valid():
-            form.save()
+            try:
+                Preference.objects.create(
+                traveler_id=traveler.id,
+                depart_date=form.cleaned_data['depart_date'],
+                return_date=form.cleaned_data['return_date'],
+                budget=form.cleaned_data['budget'],
+                point_of_interest=form.cleaned_data['point_of_interest'],
+                on_season=form.cleaned_data['on_season'])
+            except:
+                traveler = Preference.objects.get(traveler_id=request.user.traveler.id)
+                traveler.depart_date=form.cleaned_data['depart_date']
+                traveler.return_date=form.cleaned_data['return_date']
+                traveler.budget=form.cleaned_data['budget']
+                traveler.point_of_interest=form.cleaned_data['point_of_interest']
+                traveler.on_season=form.cleaned_data['on_season']
+                traveler.save()
+
             return redirect('index')
-        else:
-            return render(request, 'main/update_preference.html', {'form': form_filed})
+        return render(request, 'main/update_preference.html', {'form': form})
     return render(request, 'main/update_preference.html', context)
 
 def hotels(request, c_code):
@@ -56,7 +71,21 @@ def hotels(request, c_code):
 
     return render(request, 'main/hotels.html', context)
 
-def recommend(request):
-    traveler = request.user.traveler.preference
-    context = {'traveler':traveler}
+def recommender(request):
+    traveler_p = request.user.traveler.preference
+    
+    context = {'traveler':traveler_p}
+    trip = Trip.objects.get(city_code='Test')
+    if request.POST.get('Next') == 'Next':
+        trip.info = traveler_p.point_of_interest
+        trip.save()
+        recommend_trip, graphic = main()
+        recommend_trips = []
+        for i in recommend_trip['Countries']:
+            trip = Trip.objects.get(name=i)
+            recommend_trips.append(trip)
+        print(recommend_trips)
+        context = {'traveler':traveler_p, 'recommend':recommend_trips, 'graphic':graphic}
+        return render(request, 'main/recommend.html', context)
+    
     return render(request, 'main/recommend.html', context)

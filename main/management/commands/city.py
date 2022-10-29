@@ -14,4 +14,4 @@ class Command(BaseCommand):
 
         # iterate over DataFrame and create your objects
         for trip in data.itertuples():
-            Trip.objects.create(country=trip.iso2, city_code=trip.city_code, info=trip.description)
+            Trip.objects.create(name=trip.city, country=trip.iso2, city_code=trip.city_code, info=trip.description)

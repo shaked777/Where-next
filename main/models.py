@@ -67,6 +67,7 @@ class Trips(models.Model):
 
 class Trip(models.Model):
 
+    name = models.CharField(max_length=15, default='-')
     country = CountryField()
     city_code = models.CharField(max_length=5, default='0')
     info = models.TextField()
