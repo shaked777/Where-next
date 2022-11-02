@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from main.recommend_sys import main
 from .models import Preference, PreferenceForm
 from .models import Trip
@@ -13,6 +14,7 @@ def index(request):
 
     return render(request, 'main/index.html', context)
 
+@login_required(login_url='/accounts/signin/')
 def update_preference(request):
     try:
         traveler = request.user.traveler.preference
@@ -47,6 +49,7 @@ def update_preference(request):
         return render(request, 'main/update_preference.html', {'form': form})
     return render(request, 'main/update_preference.html', context)
 
+@login_required(login_url='/accounts/signin/')
 def hotels(request, c_code):
     amadeus = Client(
         client_id='kXwip4ajLF3GZ1LYwNyE5LADVLprotR6',
@@ -71,10 +74,16 @@ def hotels(request, c_code):
 
     return render(request, 'main/hotels.html', context)
 
+@login_required(login_url='/accounts/signin/')
 def recommender(request):
-    traveler_p = request.user.traveler.preference
+    try:
+        traveler_p = request.user.traveler.preference
+        context = {'traveler':traveler_p}
+    except:
+        new = True
+        context = {'new':new}
     
-    context = {'traveler':traveler_p}
+    
     trip = Trip.objects.get(city_code='Test')
     if request.POST.get('Next') == 'Next':
         trip.info = traveler_p.point_of_interest

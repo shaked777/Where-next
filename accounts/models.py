@@ -7,7 +7,7 @@ from django_countries.widgets import CountrySelectWidget
 # Create your models here.
 
 class Traveler(models.Model):
-
+    """profile of the user with personal data"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='traveler')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -19,6 +19,7 @@ class Traveler(models.Model):
         return f"{self.first_name} {self.last_name}"
     
 class TravelerForm(forms.ModelForm):
+    """profile form"""
     class Meta:
         model = Traveler
         fields = '__all__'

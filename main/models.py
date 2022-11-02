@@ -45,25 +45,7 @@ class PreferenceForm(forms.ModelForm):
         'point_of_interest':  forms.CheckboxSelectMultiple()
         } 
 
-class Trips(models.Model):
 
-    POINT_OF_INTERESTS = [   
-    ('food', ' Food'),
-    ('history', ' History'),
-    ('sport', ' Sport'),
-    ('clubs', ' Night life'),
-    ('shopping', ' Shopping'),
-    ]
-
-    country = CountryField()
-    city_code = models.CharField(max_length=5, default='0')
-    season_start = models.DateField()
-    season_end = models.DateField()
-    famous_for = MultiSelectField(choices=POINT_OF_INTERESTS)
-    info = models.CharField(max_length=256)
-
-    def __str__(self):
-        return f"trip to: {self.country.name}"
 
 class Trip(models.Model):
 

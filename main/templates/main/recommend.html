@@ -2,6 +2,19 @@
 {% load static %}
 {% block content %}
 
+<div style="background-color: rgb(245, 247, 248);">
+{% if new %}
+<center>
+<h1>You need to update your preference to get reccomendation</h1>
+<br>
+<br>
+<a href="{% url "update_preference" %}">
+<button class="btn btn-primary btn-lg">Go to preference</button>
+</a>
+</center>
+
+{% else %}
+
 <center><h1>Hello {{ user }}</h1>
 <h3>This is your preference :{{ traveler.point_of_interest }}</h3>
     <p>you can change it in change preference</p>
@@ -17,6 +30,11 @@
     </center>
 <br>
 <br>
+<center>
+<img src="{% static "main/images/earth.gif" %}" alt="this slowpoke moves"  width="250" />
+</center>
+{% endif %}
+
 {% if recommend %}
 <h3 class="m-3">best trips for you</h3>
 <p class="fw-semibold m-3"> Look down to see how it work</p>
@@ -43,7 +61,9 @@
 <br>
 {% endfor %}
 </div>
-
+<br>
+<br>
+<br>
 <div class="row">
     <div class="col">
         <center>
@@ -51,14 +71,19 @@
             <div class="card-header">Quick note</div>
             <div class="card-body text-dark">
               <h5 class="card-title">Why you got this reccomendation: </h5>
-              <p class="fw-semibold">where next uses an algorithm that makes a comparison between the user preferences and all the existing trips based on all kinds of variables, so all is lef to do is enjoy the trip</p>
+              <p class="fw-semibold">where next uses an algorithm that makes a comparison between the user preferences and all the existing trips based on all kinds of variables, so all is left to do is enjoy the trip</p>
             </div>
           </div>
     </div>
 </center>
-    <div class="col">
+    <div class="col m-3">
         <img src="data:image/png;base64,{{ graphic|safe }}">
     </div>
 </div>
+<br>
+<br>
+<br>
 {% endif %}
+
+</div>
 {% endblock content %}

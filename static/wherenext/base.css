@@ -6,7 +6,8 @@ body {
 
 .bgimg {
   /* Background image */
-  background-image: url('/static/wherenext/images/backround.png');
+  background-image: url('/static/wherenext/images/backround1.png');
+  /* background-image: url('/static/wherenext/images/backround.png'); */
   /* Full-screen */
   height: 100%;
   /* Center the background image */
@@ -34,16 +35,19 @@ body {
 
 /* Position text in the middle */
 .middle {
+  padding-left: 30px;
+    padding-right: 30px;
   color: rgb(51, 51, 51);
   position: absolute;
-  top: 22%;
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color:hsla(0, 0%, 100%, 0.637);
+  background-color:hsla(0, 0%, 100%, 0.782);
 }
 
 .middle2 {
+  opacity: 0.95;
   font-size: medium;
   position: absolute;
   top: 70%;
@@ -59,7 +63,35 @@ body {
   
 }
 
+.middle2 img {
+  background-image: url('/static/wherenext/images/morty.png');
+  height: 96px;
+  width: 66px;
+  position: fixed;
+  top: -40%;
+  left: 75%;
 
+}
+
+.static {
+  background-image: url('/static/wherenext/images/morty.png');
+  height: 75px;
+  width: 53px;
+  position: fixed;
+  top: -31%;
+  left: 75%;
+
+}
+
+.static:hover {
+  background-image: url('/static/wherenext/images/morty.gif');
+  height: 75px;
+  width: 53px;
+  position: fixed;
+  top: -31%;
+  left: 75%;
+
+}
 
 
 /* Style the <hr> element */

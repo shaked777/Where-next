@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .models import TravelerForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def sing_up(request):
-    
+def sing_up(request: HttpRequest) -> HttpResponse:
     context = {'form': UserCreationForm}
     if request.method == 'POST':
         
@@ -38,8 +38,7 @@ def sing_up(request):
     context = {'form' : UserCreationForm()}
     return render(request, 'accounts/sign-up.html', context)
 
-def sing_in(request):
-
+def sing_in(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         return redirect('index')
     
@@ -69,12 +68,12 @@ def sing_in(request):
     return render(request, 'accounts/sign-in.html', context)
 
 @login_required(login_url='/accounts/signin/')
-def user_logout(request):
+def user_logout(request: HttpRequest) -> HttpResponse:
     logout(request)
     return redirect('index')
 
 @login_required(login_url='/accounts/signin/')
-def update_profile(request):
+def update_profile(request: HttpRequest) -> HttpResponse:
     profile = request.user.traveler
 
     form = TravelerForm(request.POST or None, request.FILES or None, instance=profile)
@@ -88,8 +87,7 @@ def update_profile(request):
     return render(request, 'accounts/update_profile.html', context)
 
 @login_required(login_url='/accounts/signin/')
-def profile(request):
-
+def profile(request: HttpRequest) -> HttpResponse:
     if request.user.is_staff:
         return redirect('admin:index')
         

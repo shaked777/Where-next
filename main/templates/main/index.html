@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="bgimg">
 
 
     <div class="topleft">
-      <p>Logo</p>
+
     </div>
     <div class="middle">
-      <h1 class="display-1 fw-bold">COMING SOON</h1>
+      <h1 class="display-1 fw-bold">WHERE'S NEXT</h1>
       <hr>
-      <br>
-      <div class='row gx-5'>
+      <center>
+      <p><b> The idea - </b><br> save a lot of time for travelers to find there's next trip <br> with algorithm that can give recommendation</p>
+    </center>
+      <p>Set update you'r <a href="{% url 'update_preference' %}" class="btn btn-primary">Preference</a> and get started</p>
+
+      {% comment %} <div class='row gx-5'>
         <div class="col-2 ms-5">
             <div><h3 class='fw-bold'>days   <span class="badge bg-secondary" id='demo1'>New</span></h3></div>
         </div>
@@ -24,18 +28,32 @@
         <div class="col-2 ms-5">
             <div><h3 class='fw-bold'>seconds <span class="badge bg-secondary" id='demo4'>New</span></h3></div>
         </div>
-       </div>
+       </div> {% endcomment %}
     </div>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class='middle2'>
+      <div class="static">
+        <img id="my-img" src="{% static "wherenext/images/morty.png" %}" onmouseover="hover(this);" onmouseout="unhover(this);" />
+      </div>
+        {% comment %} <img id="myImg" src="{% static "wherenext/images/morty.png" %}" alt="no"> {% endcomment %}
+        
+
         <div class="card text-center text-bg-dark">
             <div class="card-header">
-              Can't wait  ?
+              New here  ?
             </div>
             <div class="card-body">
-              <h5 class="card-title">in the mean time</h5>
-              <p class="card-text">You can create an account right now and get ready when the site is lunching.</p>
+              <h5 class="card-title"></h5>
+              <p class="card-text">You can create an account right now and get try every thing <br> the site as to offer</p>
               <a href="{% url 'sign_up' %}" class="btn btn-primary">Sing up</a>
             </div>
             <div class="card-footer text-muted">
@@ -67,6 +85,14 @@
 </div>
 
 <script>
+  function hover(element) {
+    element.setAttribute('src', "{% static 'wherenext/images/morty.gif' %}");
+  }
+  
+  function unhover(element) {
+    element.setAttribute('src', "{% static 'wherenext/images/morty.png' %}");
+  }
+
     // Set the date we're counting down to
 var countDownDate = new Date("Jan 5, 2023 15:37:25").getTime();
 
