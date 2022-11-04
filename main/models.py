@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError
+from datetime import date
 from django.db import models
 from django import forms
 from accounts.models import Traveler
@@ -27,8 +29,16 @@ class Preference(models.Model):
     depart_date = models.DateField()
     return_date = models.DateField()
     budget = models.CharField(max_length=50, choices=BUDGET, default='regular')
-    point_of_interest = MultiSelectField(choices=POINT_OF_INTERESTS)
+    point_of_interest = MultiSelectField(choices=POINT_OF_INTERESTS, min_choices=2)
     on_season = models.BooleanField(default=False)
+
+    def clean(self):
+        if self.depart_date < date.today() or self.depart_date >= self.return_date:
+            raise ValidationError("Invalid date")
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.traveler.user.username} preferences"
@@ -49,9 +59,9 @@ class PreferenceForm(forms.ModelForm):
 
 class Trip(models.Model):
 
-    name = models.CharField(max_length=15, default='-')
-    country = CountryField()
-    city_code = models.CharField(max_length=5, default='0')
+    name = models.CharField(max_length=15)
+    country = CountryField(max_length=2)
+    city_code = models.CharField(max_length=5)
     info = models.TextField()
 
     def __str__(self):

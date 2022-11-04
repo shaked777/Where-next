@@ -3,6 +3,15 @@ body {
     height: 100%;
     width: 100%;
 }
+ul {
+  display: block;
+  list-style-type: None;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+}
 
 .bgimg {
   /* Background image */
@@ -35,15 +44,17 @@ body {
 
 /* Position text in the middle */
 .middle {
-  padding-left: 30px;
-    padding-right: 30px;
+  width: 100%;
+  padding-left: 60px;
+  padding-right: 60px;
   color: rgb(51, 51, 51);
   position: absolute;
   top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color:hsla(0, 0%, 100%, 0.782);
+  background-color: #F8F9FA;
+  
 }
 
 .middle2 {

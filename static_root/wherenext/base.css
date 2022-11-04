@@ -1,0 +1,177 @@
+html, 
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.bgimg {
+  /* Background image */
+  background-image: url('/static/wherenext/images/backround1.png');
+  /* background-image: url('/static/wherenext/images/backround.png'); */
+  /* Full-screen */
+  height: 100%;
+  /* Center the background image */
+  background-position: center;
+  /* Scale and zoom in the image */
+  background-size: cover;
+  background-attachment: fixed;
+  /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+  position: relative;
+  /* Add a white text color to all elements inside the .bgimg container */
+  /* Add a font */
+  /* Set the font-size to 25 pixels */
+  font-size: 25px;
+
+}
+
+/* Position text in the top-left corner */
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+
+
+/* Position text in the middle */
+.middle {
+  padding-left: 30px;
+    padding-right: 30px;
+  color: rgb(51, 51, 51);
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color:hsla(0, 0%, 100%, 0.782);
+}
+
+.middle2 {
+  opacity: 0.95;
+  font-size: medium;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color:hsla(0, 0%, 100%, 0.321);
+}
+
+
+.middle h3 {
+  color: rgb(0, 0, 0);
+  
+}
+
+.middle2 img {
+  background-image: url('/static/wherenext/images/morty.png');
+  height: 96px;
+  width: 66px;
+  position: fixed;
+  top: -40%;
+  left: 75%;
+
+}
+
+.static {
+  background-image: url('/static/wherenext/images/morty.png');
+  height: 75px;
+  width: 53px;
+  position: fixed;
+  top: -31%;
+  left: 75%;
+
+}
+
+.static:hover {
+  background-image: url('/static/wherenext/images/morty.gif');
+  height: 75px;
+  width: 53px;
+  position: fixed;
+  top: -31%;
+  left: 75%;
+
+}
+
+
+/* Style the <hr> element */
+.bgimg hr {
+  margin: auto;
+  width: 40%;
+}
+
+.dropdown-menu {
+  width: 300px !important;
+  height: 230px !important;
+}
+/* Footer */
+
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 35px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  
+.fa:hover {
+      opacity: 0.7;
+  }
+  
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+.fa-google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
+  
+.fa-instagram {
+    background: #125688;
+    color: white;
+  }
+
+@keyframes mymove {
+    from {opacity: 0.1;}
+    to {opacity: 1.0;}
+    
+  }
+  
+footer img {
+    height: 104px;
+    width: 308px;
+    opacity: 0.1;
+    text-shadow: rgb(255 255 255) 0px 0px 5px, rgb(255 255 255) 0px 0px 10px, rgb(144 220 255) 0px 0px 20px, rgb(144 220 255) 0px 0px 30px, rgb(144 220 255) 0px 0px 40px, rgb(144 220 255) 0px 0px 55px, rgb(144 220 255) 0px 0px 75px;
+  }
+  
+footer img:hover {
+    animation: mymove 2s infinite;
+    opacity: 0.5;
+  }
+
+footer{
+  bottom: 0;
+  width: 100%;
+  color: whitesmoke;
+  background-color: #333;
+  padding: 5px;   
+}
