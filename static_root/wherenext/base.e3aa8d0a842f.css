@@ -15,8 +15,8 @@ ul {
 
 .bgimg {
   /* Background image */
-  background-image: url('/static/wherenext/images/backround1.png');
-  /* background-image: url('/static/wherenext/images/backround.png'); */
+  background-image: url("/static/wherenext/images/backround1.c2838e3506fa.png");
+  /* background-image: url("/static/wherenext/images/backround.54a3beb0136c.png"); */
   /* Full-screen */
   height: 100%;
   /* Center the background image */
@@ -75,7 +75,7 @@ ul {
 }
 
 .middle2 img {
-  background-image: url('/static/wherenext/images/morty.png');
+  background-image: url("/static/wherenext/images/morty.5a2b97a26262.png");
   height: 96px;
   width: 66px;
   position: fixed;
@@ -85,7 +85,7 @@ ul {
 }
 
 .static {
-  background-image: url('/static/wherenext/images/morty.png');
+  background-image: url("/static/wherenext/images/morty.5a2b97a26262.png");
   height: 75px;
   width: 53px;
   position: fixed;
@@ -95,7 +95,7 @@ ul {
 }
 
 .static:hover {
-  background-image: url('/static/wherenext/images/morty.gif');
+  background-image: url("/static/wherenext/images/morty.48cd78134ac8.gif");
   height: 75px;
   width: 53px;
   position: fixed;
