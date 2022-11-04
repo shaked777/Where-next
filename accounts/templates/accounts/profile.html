@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <div class="row">
 <div class="content-section">
@@ -13,7 +14,7 @@
       </div>
       <div class="col d-flex justify-content-end">
         <h2 class="account-heading">Profile image:</h2>
-        <img class="rounded-circle account-img m-5" src="{{ user.traveler.avatar_img.url }}" width="400" height="400">
+        <img class="rounded-circle account-img m-5" src="{% static 'wherenext/images/defualt_profile.png'%}" width="400" height="400">
         </div>
     </div>
 </div>
