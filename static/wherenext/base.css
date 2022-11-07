@@ -49,7 +49,7 @@ ul {
   padding-right: 60px;
   color: rgb(51, 51, 51);
   position: absolute;
-  top: 12%;
+  top: 6%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -59,11 +59,13 @@ ul {
 
 @media only screen and (max-width: 600px){
 .middle {
+  padding-left: 10px;
+  padding-right: 10px;
   width: 100%;
-  height: 40%;
-  font-size: 20px;
+  height: 10%;
+  font-size: 17px;
   color: rgb(51, 51, 51);
-  top: 20%;
+  top: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #F8F9FA;
@@ -101,6 +103,31 @@ ul {
   position: fixed;
   top: -40%;
   left: 75%;
+
+}
+
+.middle3{
+  padding: 20px;
+  background-color:hsla(0, 0%, 0%, 0.144);
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 90%;
+
+
+}
+.middle3 img{
+  height: 120px;
+  width: 120px;
+
+
+}
+.middle3 h2{
+
+color: #ffffff;
+
+
 
 }
 
@@ -215,3 +242,12 @@ footer{
   background-color: #333;
   padding: 5px;   
 }
+
+@media only screen and (max-width: 600px){
+  footer{
+    bottom: 0;
+    height: 32%;
+    padding: 5px;
+  }
+  }
+
