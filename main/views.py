@@ -26,16 +26,13 @@ def update_preference(request):
     context = {'form': form}
 
     if request.method == 'POST':
-        form = PreferenceForm(request.POST, instance=traveler)
+        form = PreferenceForm(request.POST)
         if form.is_valid():
             try:
-                Preference.objects.create(
-                traveler_id=traveler.id,
-                depart_date=form.cleaned_data['depart_date'],
-                return_date=form.cleaned_data['return_date'],
-                budget=form.cleaned_data['budget'],
-                point_of_interest=form.cleaned_data['point_of_interest'],
-                on_season=form.cleaned_data['on_season'])
+                f = form.save(commit=False)
+                f.traveler = request.user.traveler
+                f.save()
+
             except:
                 traveler = Preference.objects.get(traveler_id=request.user.traveler.id)
                 traveler.depart_date=form.cleaned_data['depart_date']
@@ -44,6 +41,15 @@ def update_preference(request):
                 traveler.point_of_interest=form.cleaned_data['point_of_interest']
                 traveler.on_season=form.cleaned_data['on_season']
                 traveler.save()
+        #     except:
+        #         Preference.objects.create(
+        #         traveler_id=traveler.id,
+        #         depart_date=form.cleaned_data['depart_date'],
+        #         return_date=form.cleaned_data['return_date'],
+        #         budget=form.cleaned_data['budget'],
+        #         point_of_interest=form.cleaned_data['point_of_interest'],
+        #         on_season=form.cleaned_data['on_season'])
+
 
             return redirect('index')
         return render(request, 'main/update_preference.html', {'form': form})

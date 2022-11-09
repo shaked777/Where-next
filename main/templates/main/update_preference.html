@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
       <h2 class="card-title">Update you'r preference</h2>
-      <form class="mx-2 my-3" action="{% url 'update_preference' %}" method="post">
+      <form class="mx-2 my-3" action="{% url 'update_preference' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}
         

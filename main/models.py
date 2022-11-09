@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from datetime import date
 from django.db import models
 from django import forms
+from sqlalchemy import null
 from accounts.models import Traveler
 from multiselectfield import MultiSelectField
 from django_countries.fields import CountryField
@@ -26,15 +27,13 @@ class Preference(models.Model):
     ]
 
     traveler = models.OneToOneField(Traveler, on_delete=models.CASCADE, related_name='preference')
-    depart_date = models.DateField()
-    return_date = models.DateField()
-    budget = models.CharField(max_length=50, choices=BUDGET, default='regular')
-    point_of_interest = MultiSelectField(choices=POINT_OF_INTERESTS, min_choices=2)
+    depart_date = models.DateField(null=False)
+    return_date = models.DateField(null=False)
+    budget = models.CharField(max_length=50, choices=BUDGET, default='regular', null=False)
+    point_of_interest = MultiSelectField(choices=POINT_OF_INTERESTS, min_choices=2, null=False)
     on_season = models.BooleanField(default=False)
 
-    def clean(self):
-        if self.depart_date < date.today() or self.depart_date >= self.return_date:
-            raise ValidationError("Invalid date")
+
     
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -55,7 +54,16 @@ class PreferenceForm(forms.ModelForm):
         'point_of_interest':  forms.CheckboxSelectMultiple()
         } 
 
-
+    def clean(self):
+        cleaned_data = super(PreferenceForm, self).clean()
+        depart_date = cleaned_data.get("depart_date")
+        return_date = cleaned_data.get("return_date")
+        poi = cleaned_data.get("point_of_interest")
+        if depart_date < date.today() or depart_date >= return_date:
+            raise ValidationError("Invalid date")
+        elif poi == None or len(poi) < 2:
+            raise ValidationError("You need to pick 2 or more Point of interest")
+        
 
 class Trip(models.Model):
 
