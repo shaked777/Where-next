@@ -24,7 +24,6 @@ env = environ.Env(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-erh=3ww_k@igy_vwso4vjljgzogd^!z1wh875s(x(4x%)16_e!'
 READ_ENV_FILE = env.bool('READ_ENV_FILE', default=False)
 if READ_ENV_FILE:
     environ.Env.read_env(os.path.join(BASE_DIR, '.env'))

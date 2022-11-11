@@ -10,7 +10,7 @@ from django_countries.fields import CountryField
 # Create your models here.
 
 class Preference(models.Model):
-
+    """Traveler preference model attach preference to every user to give him personal recommendetion"""
     POINT_OF_INTERESTS = [   
 
     ('food', ' Food'),
@@ -43,7 +43,7 @@ class Preference(models.Model):
         return f"{self.traveler.user.username} preferences"
 
 class PreferenceForm(forms.ModelForm):
-    
+    """Post the form to preference model and check the validtation of form"""
     class Meta:
         model = Preference
         fields = '__all__'
@@ -66,7 +66,7 @@ class PreferenceForm(forms.ModelForm):
         
 
 class Trip(models.Model):
-
+    """The Trips models based of countries"""
     name = models.CharField(max_length=15)
     country = CountryField(max_length=2)
     city_code = models.CharField(max_length=5)

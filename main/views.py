@@ -4,18 +4,19 @@ from main.recommend_sys import main
 from .models import Preference, PreferenceForm
 from .models import Trip
 from amadeus import Client, ResponseError
+from django.http import HttpRequest, HttpResponse
 
 
 # Create your views here.
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
 
     context = {}
 
     return render(request, 'main/index.html', context)
 
 @login_required(login_url='/accounts/signin/')
-def update_preference(request):
+def update_preference(request: HttpRequest) -> HttpResponse:
     try:
         traveler = request.user.traveler.preference
     except:
@@ -41,22 +42,13 @@ def update_preference(request):
                 traveler.point_of_interest=form.cleaned_data['point_of_interest']
                 traveler.on_season=form.cleaned_data['on_season']
                 traveler.save()
-        #     except:
-        #         Preference.objects.create(
-        #         traveler_id=traveler.id,
-        #         depart_date=form.cleaned_data['depart_date'],
-        #         return_date=form.cleaned_data['return_date'],
-        #         budget=form.cleaned_data['budget'],
-        #         point_of_interest=form.cleaned_data['point_of_interest'],
-        #         on_season=form.cleaned_data['on_season'])
-
 
             return redirect('index')
         return render(request, 'main/update_preference.html', {'form': form})
     return render(request, 'main/update_preference.html', context)
 
 @login_required(login_url='/accounts/signin/')
-def hotels(request, c_code):
+def hotels(request: HttpRequest, c_code: str) -> HttpResponse:
     amadeus = Client(
         client_id='kXwip4ajLF3GZ1LYwNyE5LADVLprotR6',
         client_secret='S6v7ukGgHGOfR6Zf'
@@ -81,7 +73,7 @@ def hotels(request, c_code):
     return render(request, 'main/hotels.html', context)
 
 @login_required(login_url='/accounts/signin/')
-def recommender(request):
+def recommender(request: HttpRequest) -> HttpResponse:
     try:
         traveler_p = request.user.traveler.preference
         context = {'traveler':traveler_p}

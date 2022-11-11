@@ -1,20 +1,35 @@
-from io import BytesIO
-import base64
+from matplotlib import use
 from sqlalchemy import create_engine
-from IPython.display import display
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-from sklearn.decomposition import PCA
 import numpy as np
 import pandas as pd
-from matplotlib import use
+from io import BytesIO
+import base64
 import matplotlib.pyplot as plt
 from django.conf import settings
 
+"""
+
+██████╗ ███████╗ ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗██████╗  █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║██╔══██╗██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+██████╔╝█████╗  ██║     ██║   ██║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║██║  ██║███████║   ██║   ██║██║   ██║██╔██╗ ██║
+██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║  ██║██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║██████╔╝██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                                                                                                                        
+
+███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗
+██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║
+███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║
+╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║
+███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║
+╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
+                                                     
+
+"""                                                                                                                                                                            
 def main():
   engine = create_engine(settings.DATABASE_URL)
-
-
 
 
   # The data
@@ -23,11 +38,9 @@ def main():
   data = data.rename(columns={'info': 'description', 'name': 'city', 'id': 'population'})
   X = np.array(data.description)
 
-
   # View the data
   data = data[['population','description','city']].astype(str)
   a = data.head()
-  # display(a)
 
   # Translate the data to numbers(vectors) BERT
   text_data = X
@@ -35,41 +48,23 @@ def main():
   embeddings = model.encode(text_data, show_progress_bar=True)
   embed_data = embeddings
 
-  # PCA
   X = np.array(embed_data)
-  n_comp = 5
-  pca = PCA(n_components=n_comp)
-  pca.fit(X)
-  pca_data = pd.DataFrame(pca.transform(X))
-  b = pca_data.head()
 
-
-  # Give reccomendatio by the cosine simalrity of the vectors
+  # Give reccomendation by the cosine simalrity of the vectors
   cos_sim_data = pd.DataFrame(cosine_similarity(X))
-  def give_recommendations(index,print_recommendation = False,print_recommendation_plots= False):
+  def give_recommendations(index,print_recommendation = False):
     
     index_recomm =cos_sim_data.loc[index].sort_values(ascending=False).index.tolist()[1:4]
-    movies_recomm =  data['city'].loc[index_recomm].values
-    result = {'Countries':movies_recomm,'Index':index_recomm}
+    trip_recomm =  data['city'].loc[index_recomm].values
+    result = {'Countries':trip_recomm,'Index':index_recomm}
     if print_recommendation==True:
-      print('The liked country is: %s \n'%(data['city'].loc[index]))
       k=1
-      for movie in movies_recomm:
-        print('The number %i recommended country is: %s \n'%(k,movie))
-        genrs = data.loc[data['city']==str(movie)].index[0]
-        print('The popultion of that country is: '+data['population'].loc[genrs])
-        k=k+1
-        print("----------------------")
-    if print_recommendation_plots==True:
-      print('The description of the country is this one:\n %s \n'%(data['description'].loc[index]))
-      k=1
-      for q in range(len(movies_recomm)):
-        plot_q = data['description'].loc[index_recomm[q]]
-        print('The description of the number %i recommended country is this one:\n %s \n'%(k,plot_q))
+      for trip in trip_recomm:
+        genrs = data.loc[data['city']==str(trip)].index[0]
         k=k+1
     return result
 
-  # Plot random reccomendation
+  # Plot the recommendation
   plt.style.use('bmh')
   use('Agg')
   plt.figure(figsize=(5,5))
@@ -83,7 +78,7 @@ def main():
   y = cos_sim_data.loc[index][x].tolist()
   m = recomm_index['Countries']
   plt.plot(x,y,'.',color='navy',label='Recommended trips')
-  plt.title('your preference: '+data['city'].loc[index])
+  plt.title('your preference')
   plt.xlabel('Country Index')
   k=0
   for x_i in x:
