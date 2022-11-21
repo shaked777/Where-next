@@ -31,7 +31,7 @@ if READ_ENV_FILE:
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 DATABASE_URL = env('DATABASE_URL')
-ALLOWED_HOSTS = ["*"]
+
 
 
 # Quick-start development settings - unsuitable for production
